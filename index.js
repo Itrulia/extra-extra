@@ -12,7 +12,7 @@ const incomingWebhook = process.env.SLACK_INCOMING_WEBHOOK
 const webhook = new IncomingWebhook(incomingWebhook);
 
 const bajourClient = createClient({
-    url: 'https://api.bajour.ch/v1',
+    url: 'https://api-bajour.wepublish.media/v1',
     fetch
 });
 
