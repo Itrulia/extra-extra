@@ -27,7 +27,7 @@ const hauptstadtClient = createClient({
 });
 
 const gruppettoClient = createClient({
-    url: 'https://api.gruppetto.wepublish.media/v1',
+    url: 'https://api-gruppetto.wepublish.media/v1',
     fetch
 });
 
