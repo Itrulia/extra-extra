@@ -17,12 +17,17 @@ const bajourClient = createClient({
 });
 
 const tsriClient = createClient({
-    url: 'https://api.tsri.ch/v1',
+    url: 'https://api-tsri.wepublish.media/v1',
+    fetch
+});
+
+const mannschaftClient = createClient({
+    url: 'https://api-mannschaft.wepublish.media/v1',
     fetch
 });
 
 const hauptstadtClient = createClient({
-    url: 'https://api.hauptstadt.be/v1',
+    url: 'https://api-hauptstadt.wepublish.media/v1',
     fetch
 });
 
@@ -92,7 +97,7 @@ const express = require('express');
 const app = express();
 
 app.get('/', async (req, res) => {
-    webhook.send({
+    await webhook.send({
         text: `In den letzten 24 Stunden wurden folgende Artikel publiziert:`
     })
 
@@ -120,6 +125,13 @@ app.get('/', async (req, res) => {
     try {
         const gruppettoItems = await gruppettoClient.query(QUERY, {}).toPromise()
         handleGraphQLResponse(gruppettoItems, ':gruppetto_rosa_logo:')
+    } catch (e) {
+        console.error(e)
+    }
+
+    try {
+        const mannschaftItems = await mannschaftClient.query(QUERY, {}).toPromise()
+        handleGraphQLResponse(mannschaftItems, ':mannschaft:')
     } catch (e) {
         console.error(e)
     }
