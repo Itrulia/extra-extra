@@ -36,6 +36,11 @@ const gruppettoClient = createClient({
     fetch
 });
 
+const kolumnaClient = createClient({
+    url: 'https://api-kolumna.wepublish.media/v1',
+    fetch
+});
+
 const QUERY = `
 query Test {
     articles(take: 5) {
@@ -132,6 +137,13 @@ app.get('/', async (req, res) => {
     try {
         const mannschaftItems = await mannschaftClient.query(QUERY, {}).toPromise()
         handleGraphQLResponse(mannschaftItems, ':mannschaft:')
+    } catch (e) {
+        console.error(e)
+    }
+
+    try {
+        const kolumnaItems = await kolumnaClient.query(QUERY, {}).toPromise()
+        handleGraphQLResponse(kolumnaItems, ':kolumna:')
     } catch (e) {
         console.error(e)
     }
